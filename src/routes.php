@@ -42,6 +42,23 @@ Route::group(['middleware' => \Kordy\Ticketit\Helpers\LaravelVersion::authMiddle
             ],
         ]);
 
+    //Ticket Attachmets public route
+    $field_name = last(explode('/', "$main_route_path-attachment"));
+    Route::resource("$main_route_path-attachment", 'Kordy\Ticketit\Controllers\attachmentsController', [
+            'names' => [
+                'index'   => "$main_route-attachment.index",
+                'store'   => "$main_route-attachment.store",
+                'create'  => "$main_route-attachment.create",
+                'update'  => "$main_route-attachment.update",
+                'show'    => "$main_route-attachment.show",
+                'destroy' => "$main_route-attachment.destroy",
+                'edit'    => "$main_route-attachment.edit",
+            ],
+            'parameters' => [
+                $field_name => 'ticket_attachment',
+            ],
+        ]);
+
     //Ticket complete route for permitted user.
     Route::get("$main_route_path/{id}/complete", 'Kordy\Ticketit\Controllers\TicketsController@complete')
             ->name("$main_route.complete");

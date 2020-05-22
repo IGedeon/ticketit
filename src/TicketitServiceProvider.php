@@ -12,6 +12,7 @@ use Kordy\Ticketit\Console\Htmlify;
 use Kordy\Ticketit\Controllers\InstallController;
 use Kordy\Ticketit\Controllers\NotificationsController;
 use Kordy\Ticketit\Helpers\LaravelVersion;
+use Kordy\Ticketit\Models\Attachment;
 use Kordy\Ticketit\Models\Comment;
 use Kordy\Ticketit\Models\Setting;
 use Kordy\Ticketit\Models\Ticket;
@@ -59,6 +60,14 @@ class TicketitServiceProvider extends ServiceProvider
                 if (Setting::grab('comment_notification')) {
                     $notification = new NotificationsController();
                     $notification->newComment($comment);
+                }
+            });
+
+            // Send notification when new Attachment is added
+            Attachment::creating(function ($attachment) {
+                if (Setting::grab('attachment_notification')) {
+                    $notification = new NotificationsController();
+                    $notification->newAttachment($attachment);
                 }
             });
 

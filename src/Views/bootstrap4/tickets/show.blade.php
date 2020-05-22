@@ -60,6 +60,8 @@
     {{-- pagination --}}
     {!! $comments->render("pagination::bootstrap-4") !!}
     @include('ticketit::tickets.partials.comment_form')
+    @include('ticketit::tickets.partials.attachments')
+    @include('ticketit::tickets.partials.attachment_form')
 @stop
 
 @section('footer')

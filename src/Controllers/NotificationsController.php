@@ -22,6 +22,17 @@ class NotificationsController extends Controller
             trans('ticketit::lang.notify-new-comment-from').$notification_owner->name.trans('ticketit::lang.notify-on').$ticket->subject, 'comment');
     }
 
+    public function newAttachment(Attachment $attachment)
+    {
+        $ticket = $attachment->ticket;
+        $notification_owner = $attachment->user;
+        $template = 'ticketit::emails.attachment';
+        $data = ['attachment' => serialize($attachment), 'ticket' => serialize($ticket)];
+
+        $this->sendNotification($template, $data, $ticket, $notification_owner,
+            trans('ticketit::lang.notify-new-attachment-from').$notification_owner->name.trans('ticketit::lang.notify-on').$ticket->subject, 'attachment');
+    }
+
     public function ticketStatusUpdated(Ticket $ticket, Ticket $original_ticket)
     {
         $notification_owner = auth()->user();
@@ -59,6 +70,8 @@ class NotificationsController extends Controller
     {
         $notification_owner = auth()->user();
         $template = 'ticketit::emails.assigned';
+        $ticket=Ticket::with('category')->find($ticket->id);
+        //dd(serialize($ticket));
         $data = [
             'ticket'             => serialize($ticket),
             'notification_owner' => serialize($notification_owner),
