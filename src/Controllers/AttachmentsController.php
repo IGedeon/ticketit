@@ -4,15 +4,17 @@ namespace Kordy\Ticketit\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Kordy\Ticketit\Models;
+use Kordy\Ticketit\Models\Agent;
 use Kordy\Ticketit\Models\Attachment;
 
 class AttachmentsController extends Controller
 {
-    public function __construct()
+
+    public function __construct(Attachment $attachments, Agent $agent)
     {
-        $this->middleware('Kordy\Ticketit\Middleware\IsAdminMiddleware', ['only' => ['edit', 'update', 'destroy']]);
-        $this->middleware('Kordy\Ticketit\Middleware\ResAccessMiddleware', ['only' => 'store']);
+        $this->middleware('Kordy\Ticketit\Middleware\ResAccessMiddleware', ['only' => ['show','store']]);
     }
 
     /**
@@ -46,18 +48,17 @@ class AttachmentsController extends Controller
     {
 
         $this->validate($request, [
-            'file' => 'required|max:20480',
+            'attachment' => 'required|max:20480',
             'ticket_id'   => 'required|exists:ticketit,id',
-            'public_name' => 'required|max:100',
         ]);
-
-        $private_name = $request->file->store('attachments');
+        
+        $private_name = $request->file('attachment')->store('attachments');
 
         $attachment = new Models\Attachment();
 
-        $attachment->storage_name = $private_name;
+        $attachment->private_name = $private_name;
 
-        $attachment->public_name = $request->get('public_name');
+        $attachment->public_name = $request->file('attachment')->getClientOriginalName();
 
         $attachment->ticket_id = $request->get('ticket_id');
         $attachment->user_id = \Auth::user()->id;
@@ -79,8 +80,11 @@ class AttachmentsController extends Controller
      */
     public function show($id)
     {
-        //
+        $attachment = Attachment::findOrFail($id);
+        return Storage::download($attachment->private_name,$attachment->public_name);
     }
+
+    
 
     /**
      * Show the form for editing the specified resource.

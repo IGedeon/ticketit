@@ -44,7 +44,7 @@ return [
   'btn-close'                        => 'Cerrar',
   'btn-delete'                       => 'Borrar',
   'btn-edit'                         => 'Editar',
-  'btn-mark-complete'                => 'Marcar com Completo',
+  'btn-mark-complete'                => 'Marcar como Completo',
   'btn-submit'                       => 'Enviar',
 
   'agent'                            => 'Agente',
@@ -63,6 +63,7 @@ return [
   'responsible'                      => 'Responsable',
   'status'                           => 'Estado',
   'subject'                          => 'Asunto',
+  'upload_attachment'                => 'Subir Adjunto',
 
  /*
   *  Page specific
@@ -120,6 +121,8 @@ return [
 
 // CommentsController
   'comment-has-been-added-ok'        => 'Comentario fue añadido de forma correcta',
+//AttachmentsController
+  'attachment-has-been-added-ok'     => 'El archivo fue adjuntado correctamente',
 
 // NotificationsController
   'notify-new-comment-from'          => 'Nuevo comentario de ',

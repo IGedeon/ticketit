@@ -5,6 +5,7 @@ namespace Kordy\Ticketit\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Kordy\Ticketit\Helpers\LaravelVersion;
+use Kordy\Ticketit\Models\Attachment;
 use Kordy\Ticketit\Models\Comment;
 use Kordy\Ticketit\Models\Setting;
 use Kordy\Ticketit\Models\Ticket;

@@ -5,6 +5,7 @@ namespace Kordy\Ticketit\Middleware;
 use Closure;
 use Kordy\Ticketit\Helpers\LaravelVersion;
 use Kordy\Ticketit\Models\Agent;
+use Kordy\Ticketit\Models\Attachment;
 use Kordy\Ticketit\Models\Setting;
 
 class ResAccessMiddleware
@@ -42,6 +43,13 @@ class ResAccessMiddleware
         // if this is a new comment on a ticket
         if ($request->route()->getName() == Setting::grab('main_route').'-comment.store') {
             $ticket_id = $request->get('ticket_id');
+        }
+
+        // if this is a attachment download
+        if ($request->route()->getName() == Setting::grab('main_route').'-attachment.show') {
+            
+            $ticket_id  = Attachment::find($request->route('ticket_attachment'))
+                    ->ticket->id;
         }
 
         // Assigned Agent has access in the restricted mode enabled

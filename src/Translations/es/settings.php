@@ -32,6 +32,17 @@ ENDHTML
 				No enviar notificación: <code>0</code>
 			</p>
 ENDHTML
+	
+	, 'attachment_notification' => <<<'ENDHTML'
+			<p>
+				<b>Notificación de adjuntos</b>: Enviar notificación cuando se adjunte un archivo
+			</p>
+
+			<p>
+				Predeterminado es enviar notificación: <code>1</code><br>
+				No enviar notificación: <code>0</code>
+			</p>
+ENDHTML	
 
     , 'queue_emails' => <<<'ENDHTML'
 			<p>

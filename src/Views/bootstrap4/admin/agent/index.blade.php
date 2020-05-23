@@ -39,11 +39,15 @@
                         {{ $agent->name }}
                     </td>
                     <td>
+                        <ul>
                         @foreach($agent->categories as $category)
+                            <li>
                             <span style="color: {{ $category->color }}">
                                 {{  $category->name }}
                             </span>
+                            </li>
                         @endforeach
+                        </ul>
                     </td>
                     <td>
                         {!! CollectiveForm::open([
@@ -53,14 +57,18 @@
                                                     $agent->id
                                                     ],
                                         ]) !!}
+                        <ul>
                         @foreach(\Kordy\Ticketit\Models\Category::all() as $agent_cat)
+                            <li>
                             <input name="agent_cats[]"
                                    type="checkbox"
                                    class="form-check-input"
                                    value="{{ $agent_cat->id }}"
                                    {!! ($agent_cat->agents()->where("id", $agent->id)->count() > 0) ? "checked" : ""  !!}
                                    > {{ $agent_cat->name }}
+                            </li>
                         @endforeach
+                        </ul>
                         {!! CollectiveForm::submit(trans('ticketit::admin.btn-join'), ['class' => 'btn btn-info btn-sm']) !!}
                         {!! CollectiveForm::close() !!}
                     </td>

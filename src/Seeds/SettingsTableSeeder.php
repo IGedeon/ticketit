@@ -167,6 +167,12 @@ class SettingsTableSeeder extends Seeder
              */
             'comment_notification' => 'yes',
             /*
+             * Attachment notification: Send notification when new attachment is uploaded
+             * Default is send notification: 'yes'
+             * Do not send notification: 'no'
+             */
+            'attachment_notification' => 'yes',
+            /*
              * Use Queue method when sending emails (Mail::queue instead of Mail::send). Note that Mail::queue needs to be
              * configured first http://laravel.com/docs/5.1/queues
              * Default is to not use queue: 'no'
