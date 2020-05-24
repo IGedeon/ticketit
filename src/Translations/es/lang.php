@@ -126,6 +126,7 @@ return [
 
 // NotificationsController
   'notify-new-comment-from'          => 'Nuevo comentario de ',
+  'notify-new-attachment-from'       => 'Nuevo archivo de ',
   'notify-on'                        => ' en ',
   'notify-status-to-complete'        => ' estado a Completado ',
   'notify-status-to'                 => ' estado a ',
