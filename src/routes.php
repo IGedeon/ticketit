@@ -44,7 +44,7 @@ Route::group(['middleware' => \Kordy\Ticketit\Helpers\LaravelVersion::authMiddle
 
     //Ticket Attachmets public route
     $field_name = last(explode('/', "$main_route_path-attachment"));
-    Route::resource("$main_route_path-attachment", 'Kordy\Ticketit\Controllers\attachmentsController', [
+    Route::resource("$main_route_path-attachment", 'Kordy\Ticketit\Controllers\AttachmentsController', [
             'names' => [
                 'index'   => "$main_route-attachment.index",
                 'store'   => "$main_route-attachment.store",
