@@ -45,9 +45,13 @@ class ResAccessMiddleware
             $ticket_id = $request->get('ticket_id');
         }
 
+        // if this is a attachment upload
+        if ($request->route()->getName() == Setting::grab('main_route').'-attachment.store') {
+            $ticket_id = $request->ticket_id;
+        }
+
         // if this is a attachment download
         if ($request->route()->getName() == Setting::grab('main_route').'-attachment.show') {
-            
             $ticket_id  = Attachment::find($request->route('ticket_attachment'))
                     ->ticket->id;
         }
